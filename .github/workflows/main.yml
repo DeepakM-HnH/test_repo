@@ -16,8 +16,14 @@ jobs:
       - name: Display Start Message New
         run: echo "Starting the build process..."
 
+      - name: Debug Information
+        run: |
+          pwd
+          ls -al $GITHUB_WORKSPACE
+
       - name: Change to Project Directory
-        run: cd $GITHUB_WORKSPACE/TestBuildApp
+        run: cd "$GITHUB_WORKSPACE/TestBuildApp"
 
       - name: Build Project
         run: dotnet build TestBuildApp.csproj
+        working-directory: $GITHUB_WORKSPACE/TestBuildApp
