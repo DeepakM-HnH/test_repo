@@ -17,7 +17,7 @@ jobs:
         run: echo "Starting the build process..."
 
       - name: Change to Project Directory
-        run: cd $GITHUB_WORKSPACE/TestBuildApp
+        run:  cd $GITHUB_WORKSPACE/$(find . -type d -iname 'TestBuildApp' -print -quit)
 
       - name: Build Project
         run: dotnet build C:/Deepak/Test/test_repo/TestBuildApp/TestBuildApp.csproj
