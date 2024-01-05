@@ -17,4 +17,4 @@ jobs:
         run: echo "Starting the build process..."
 
       - name: Build Project
-        run: dotnet build C:/Deepak/Test/test_repo/test_repo/test_repo/TestBuildApp/TestBuildApp.csproj
+        run: dotnet build $GITHUB_WORKSPACE/TestBuildApp/TestBuildApp.csproj
