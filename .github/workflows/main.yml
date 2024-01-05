@@ -14,13 +14,13 @@ jobs:
         run: echo "Starting the build process..."
 
       - name: Display GitHub Actions Workspace
-        run: echo "GitHub Actions workspace path:" $GITHUB_WORKSPACE
+        run: echo "GitHub Actions workspace path: $GITHUB_WORKSPACE"
 
       - name: List Contents
         run: ls -al
 
       - name: Change to Project Directory
-        run: cd "$GITHUB_WORKSPACE" && cd TestBuildApp
+        run: cd "$GITHUB_WORKSPACE" && cd $(find . -type d -name 'TestBuildApp' -print -quit)
 
       - name: Display Current Directory
         run: pwd
