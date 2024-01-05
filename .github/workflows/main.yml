@@ -4,23 +4,19 @@ on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Display Start Message New24
+      - name: Display Start Message new26
         run: echo "Starting the build process..."
 
       - name: Change to Project Directory
-        run: cd "$GITHUB_WORKSPACE/$(find . -type d -name 'TestBuildApp' -print -quit)"
-
-      - name: Display Current Directory
-        run: pwd
+        run: |
+          cd $GITHUB_WORKSPACE/TestBuildApp
+          ls -al  # List contents of the directory for debugging
 
       - name: Build Project
-        run: dotnet build "C:/Deepak/Test/test_repo/TestBuildApp/TestBuildApp.csproj"
+        run: dotnet build
