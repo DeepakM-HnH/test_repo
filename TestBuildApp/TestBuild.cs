@@ -1,5 +1,5 @@
 ﻿namespace TestBuildApp
-{
+{//test
     public class TestBuild
     {
         public static void Main()
