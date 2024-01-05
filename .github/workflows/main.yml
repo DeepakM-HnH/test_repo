@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Display Start Message New21
+      - name: Display Start Message New22
         run: echo "Starting the build process..."
 
       - name: Change to Project Directory
@@ -23,4 +23,4 @@ jobs:
         run: pwd
 
       - name: Build Project
-        run: dotnet build
+        run: dotnet build C:\Deepak\Test\test_repo\TestBuildApp\TestBuildApp.csproj
