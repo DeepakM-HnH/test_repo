@@ -16,8 +16,14 @@ jobs:
       - name: Display Start Message
         run: echo "Starting the build process..."
 
+      - name: List Workspace Contents
+        run: ls -al "${{ github.workspace }}"
+
       - name: Change to Project Directory
-        run: cd "${{ github.workspace }}/TestBuildApp"
+        run: cd "${{ github.workspace }}"
+
+      - name: List Project Directory Contents
+        run: ls -al TestBuildApp
 
       - name: Build Project
-        run: dotnet build
+        run: dotnet build TestBuildApp/TestBuildApp.csproj
