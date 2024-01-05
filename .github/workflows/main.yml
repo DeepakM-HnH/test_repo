@@ -13,8 +13,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Display Start Message New3
+      - name: Display Start Message New4
         run: echo "Starting the build process..."
+
+      - name: Print GitHub Actions Workspace Path
+        run: echo "GitHub Actions workspace path:" $GITHUB_WORKSPACE
+
+      - name: List Contents
+        run: ls -al
 
       - name: Debug Information
         run: |
