@@ -16,5 +16,8 @@ jobs:
       - name: Display Start Message
         run: echo "Starting the build process..."
 
+      - name: Change to Project Directory
+        run: cd C:/Deepak/Test/test_repo/TestBuildApp
+
       - name: Build Project
-        run: dotnet build C:\Deepak\Test\test_repo\TestBuildApp\TestBuildApp.csproj
+        run: dotnet build TestBuildApp.csproj
