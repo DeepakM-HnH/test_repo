@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "cSx3wy7Hd5l/RSgBv5DlL3IrP5s6ilXUPm68zIJxxYneWQWo+B8ekyM9Xutd3POgh6YfUU+LyK2rtVEqKtx5ug==",
+  "dgSpecHash": "pQxIlsPyRJvi1Oe4ZlFAHtcnH7OOuGypsy9xQJ7qlAle4mTD4uxJhosEA8C3eqLjHtJctqUIdKN7V1EzOnQ4ZA==",
   "success": true,
-  "projectFilePath": "C:\\Deepak\\Test\\test_repo\\TestBuildApp\\TestBuildApp.csproj",
+  "projectFilePath": "C:\\Deepak\\Test\\test_repo\\test_repo\\TestBuildApp\\TestBuildApp.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
