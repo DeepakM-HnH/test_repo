@@ -13,14 +13,17 @@ jobs:
       - name: Display Start Message
         run: echo "Starting the build process..."
 
+      - name: Display GitHub Actions Workspace
+        run: echo "GitHub Actions workspace path: $GITHUB_WORKSPACE"
+
+      - name: List Contents
+        run: ls -al
+
       - name: Change to Project Directory
-        run: |
-          cd $GITHUB_WORKSPACE  # Navigate to the root of the workspace
-          cd $(find . -type d -name 'TestBuildApp' -print -quit)  # Locate the TestBuildApp directory
-          ls -al                 # List contents of the directory for debugging
+        run: cd "$GITHUB_WORKSPACE" && cd TestBuildApp
 
       - name: Display Current Directory
-        run: pwd  # Print the current directory for debugging
+        run: pwd
 
       - name: Build Project
         run: dotnet build
