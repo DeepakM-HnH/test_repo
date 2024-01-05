@@ -4,14 +4,17 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
+      - name: Display Start Message
+        run: echo "Starting the build process..."
 
-      - name: Run Build
-        run: echo "Run your build commands here"
+      - name: Build Project
+        run: dotnet build
