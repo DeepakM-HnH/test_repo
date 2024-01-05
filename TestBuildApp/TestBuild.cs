@@ -1,7 +1,7 @@
 ﻿namespace TestBuildApp
 {
     public class TestBuild
-    {
+    {//test
         public static void Main()
         {
             DisplayMessage();
