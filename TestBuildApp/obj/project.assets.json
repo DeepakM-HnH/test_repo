@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Deepak\\Test\\test_repo\\TestBuildApp\\TestBuildApp.csproj",
+      "projectUniqueName": "C:\\Deepak\\Test\\test_repo\\test_repo\\TestBuildApp\\TestBuildApp.csproj",
       "projectName": "TestBuildApp",
-      "projectPath": "C:\\Deepak\\Test\\test_repo\\TestBuildApp\\TestBuildApp.csproj",
+      "projectPath": "C:\\Deepak\\Test\\test_repo\\test_repo\\TestBuildApp\\TestBuildApp.csproj",
       "packagesPath": "C:\\Users\\deepak.mandal\\.nuget\\packages\\",
-      "outputPath": "C:\\Deepak\\Test\\test_repo\\TestBuildApp\\obj\\",
+      "outputPath": "C:\\Deepak\\Test\\test_repo\\test_repo\\TestBuildApp\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\deepak.mandal\\AppData\\Roaming\\NuGet\\NuGet.Config",
