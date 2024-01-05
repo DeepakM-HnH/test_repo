@@ -16,6 +16,9 @@ jobs:
       - name: Display Start Message
         run: echo "Starting the build process..."
 
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
       - name: List Workspace Contents
         run: ls -al "${{ github.workspace }}"
 
