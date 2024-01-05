@@ -16,8 +16,8 @@ jobs:
       - name: Change to Project Directory
         run: |
           cd $GITHUB_WORKSPACE  # Navigate to the root of the workspace
-          cd $(find . -type d -name 'TestBuildApp' -print -quit)  # Navigate to the TestBuildApp directory
-          ls -al  # List contents of the directory for debugging
+          cd TestBuildApp        # Navigate to the TestBuildApp directory
+          ls -al                 # List contents of the directory for debugging
 
       - name: Display Current Directory
         run: pwd  # Print the current directory for debugging
