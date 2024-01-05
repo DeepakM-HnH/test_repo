@@ -19,5 +19,8 @@ jobs:
       - name: Change to Project Directory
         run: cd C:/Deepak/Test/test_repo/TestBuildApp
 
+      - name: Change to Project Directory
+        run:  cd "/c/Deepak/Test/test_repo/TestBuildApp"
+
       - name: Build Project
         run: dotnet build TestBuildApp.csproj
