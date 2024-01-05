@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Display Start Message New2
+      - name: Display Start Message New3
         run: echo "Starting the build process..."
 
       - name: Debug Information
@@ -22,8 +22,8 @@ jobs:
           ls -al $GITHUB_WORKSPACE
 
       - name: Change to Project Directory
-        run: cd "$GITHUB_WORKSPACE/test_repo/test_repo/TestBuildApp"
+        run: cd "$GITHUB_WORKSPACE/TestBuildApp"
 
       - name: Build Project
         run: dotnet build TestBuildApp.csproj
-        working-directory: $GITHUB_WORKSPACE/test_repo/test_repo/TestBuildApp
+        working-directory: $GITHUB_WORKSPACE/TestBuildApp
