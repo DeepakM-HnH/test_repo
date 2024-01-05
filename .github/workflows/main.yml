@@ -13,17 +13,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Display Start Message New6
+      - name: Display Start Message New7
         run: echo "Starting the build process..."
 
-      - name: Print GitHub Actions Workspace Path
-        run: echo "GitHub Actions workspace path:" $GITHUB_WORKSPACE
-
-      - name: List Contents
-        run: ls -al
-
       - name: Change to Project Directory
-        run: cd "$GITHUB_WORKSPACE" && cd $(find . -type d -name 'TestBuildApp' -print -quit)
+        run: cd $GITHUB_WORKSPACE/TestBuildApp
 
       - name: Build Project
-        run: dotnet build
+        run: dotnet build TestBuildApp.csproj
