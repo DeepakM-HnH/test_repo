@@ -12,11 +12,6 @@ jobs:
     steps:
       - name: Display Start Message new26
         run: echo "Starting the build process..."
-
-      - name: Change to Project Directory
-        run: |
-          cd $GITHUB_WORKSPACE/TestBuildApp
-          ls -al  # List contents of the directory for debugging
-
+        
       - name: Build Project
         run: dotnet build
