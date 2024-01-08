@@ -24,7 +24,7 @@ jobs:
         run: cd "${{ github.workspace }}"
 
       - name: Restore Dependencies
-        run: dotnet restore TestBuildApp/TestBuildApp.csproj
+        run: dotnet restore TestBuildApp/TestBuildApp.sln
 
       - name: Build Project
-        run: dotnet build TestBuildApp/TestBuildApp.csproj
+        run: dotnet build TestBuildApp/TestBuildApp.sln
