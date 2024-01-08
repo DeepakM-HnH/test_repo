@@ -17,15 +17,6 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Setup .NET SDK
-        uses: actions/setup-dotnet@v2  
-
-      - name: Install dotnet version tool
-        run: dotnet tool install -g dotnet-version-cli
-
-      - name: Set Version
-        run: dotnet version --project Qor3.sln --auto-increment
-
       - name: Display Start Message
         run: echo "Starting the build process..."
 
@@ -37,3 +28,8 @@ jobs:
 
       - name: Build Project
         run: dotnet build TestBuildApp/TestBuildApp.sln
+
+      - name: Set Version
+        run: dotnet version --auto-increment --project-file TestBuildApp/TestBuildApp.csproj
+
+  # Add more steps for testing, deployment, etc.
