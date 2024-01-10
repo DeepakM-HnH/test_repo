@@ -13,17 +13,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+
       - name: Checkout Repository
         uses: actions/checkout@v2
 
       - name: Display Start Message
         run: echo "Starting the build process..."
-
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v5
-
-      - name: Install dotnet version tool
-        run: dotnet tool install -g dotnet-version-cli
 
       - name: Change to Project Directory
         run: cd "${{ github.workspace }}"
@@ -33,6 +28,3 @@ jobs:
 
       - name: Build Project
         run: dotnet build TestBuildApp/TestBuildApp.sln
-
-      - name: Set Version
-        run: dotnet version --auto-increment --project-file TestBuildApp/TestBuildApp.csproj
