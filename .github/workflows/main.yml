@@ -19,20 +19,17 @@ jobs:
       - name: Display Directory Contents
         run: ls -R
 
-      - name: Display Start Message
-        run: echo "Starting the build process..."
-
       - name: Change to Project Directory
         run: cd "${{ github.workspace }}/TestBuildApp"
 
-      - name: Display Project Directory Contents
-        run: ls -R
-
       - name: Restore Dependencies
-        run: dotnet restore TestBuildApp.sln
+        run: dotnet restore
 
       - name: Build Project
-        run: dotnet build TestBuildApp.sln
+        run: dotnet build
+
+      - name: Display Bin Contents
+        run: ls -R bin
 
   deploy:
     runs-on: ubuntu-latest
@@ -44,17 +41,14 @@ jobs:
       - name: Display Directory Contents
         run: ls -R
 
-      - name: Display Start Message
-        run: echo "Starting the deployment process..."
-
       - name: Change to Project Directory
         run: cd "${{ github.workspace }}/TestBuildApp"
 
-      - name: Display Project Directory Contents
-        run: ls -R
-
       - name: Publish Application
         run: dotnet publish -c Release -o ${GITHUB_WORKSPACE}/publish
+
+      - name: Display Publish Contents
+        run: ls -R ${GITHUB_WORKSPACE}/publish
 
       - name: Deploy Locally
         run: cp -r ${GITHUB_WORKSPACE}/publish/* /c/Deepak/deployment
