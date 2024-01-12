@@ -13,20 +13,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Display Directory Contents
-        run: ls -R
+      - name: Display Start Message
+        run: echo "Starting the build process..."
 
       - name: Change to Project Directory
-        run: cd "${{ github.workspace }}/TestBuildApp"
+        run: cd "${{ github.workspace }}"
 
       - name: Restore Dependencies
-        run: dotnet restore
+        run: dotnet restore TestBuildApp/TestBuildApp.sln
 
       - name: Build Project
-        run: dotnet build
-
-      - name: Display Bin Contents
-        run: ls -R bin
+        run: dotnet build TestBuildApp/TestBuildApp.sln
