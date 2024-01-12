@@ -39,7 +39,7 @@ jobs:
         run: echo "Starting the deployment process..."
 
       - name: Change to Project Directory
-        run: cd "${{ github.workspace }}"
+        run: cd "${{ github.workspace }}/TestBuildApp"  # Update this path based on your project structure
 
       - name: Publish Application
         run: dotnet publish -c Release -o ./publish
