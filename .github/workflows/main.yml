@@ -13,7 +13,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-
       - name: Checkout Repository
         uses: actions/checkout@v2
 
@@ -28,3 +27,25 @@ jobs:
 
       - name: Build Project
         run: dotnet build TestBuildApp/TestBuildApp.sln
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Display Deploy Message
+        run: echo "Starting the deployment process..."
+
+      - name: Change to Project Directory
+        run: cd "${{ github.workspace }}"
+
+      - name: Publish Application
+        run: dotnet publish -c Release -o ${GITHUB_WORKSPACE}/publish
+
+      - name: Display Publish Contents
+        run: ls -R ${GITHUB_WORKSPACE}/publish
+
+      - name: Deploy Locally
+        run: cp -r ${GITHUB_WORKSPACE}/publish/* /c/Deepak/deployment
