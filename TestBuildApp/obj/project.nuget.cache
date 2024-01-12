@@ -1,8 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "pQxIlsPyRJvi1Oe4ZlFAHtcnH7OOuGypsy9xQJ7qlAle4mTD4uxJhosEA8C3eqLjHtJctqUIdKN7V1EzOnQ4ZA==",
+  "dgSpecHash": "ayv9l/SuwtUc8UTtV7PyX9RMPAefB4FJFBSHxq7endp9qmSd+lYBPlZUgvNM683wJTHLTb6ZsjJvhF2td20CAQ==",
   "success": true,
-  "projectFilePath": "C:\\Deepak\\Test\\test_repo\\test_repo\\TestBuildApp\\TestBuildApp.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Deepak\\Test\\test_repo\\TestBuildApp\\TestBuildApp.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\deepak.mandal\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\7.0.15\\microsoft.windowsdesktop.app.ref.7.0.15.nupkg.sha512",
+    "C:\\Users\\deepak.mandal\\.nuget\\packages\\microsoft.netcore.app.ref\\7.0.15\\microsoft.netcore.app.ref.7.0.15.nupkg.sha512",
+    "C:\\Users\\deepak.mandal\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\7.0.15\\microsoft.aspnetcore.app.ref.7.0.15.nupkg.sha512",
+    "C:\\Users\\deepak.mandal\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\7.0.15\\microsoft.netcore.app.host.win-x64.7.0.15.nupkg.sha512"
+  ],
   "logs": []
 }
