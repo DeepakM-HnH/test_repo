@@ -23,10 +23,10 @@ jobs:
         run: cd "${{ github.workspace }}/TestBuildApp"
 
       - name: Restore Dependencies
-        run: dotnet restore TestBuildApp/TestBuildApp.sln
+        run: dotnet restore TestBuildApp.sln
 
       - name: Build Project
-        run: dotnet build TestBuildApp/TestBuildApp.sln
+        run: dotnet build TestBuildApp.sln
 
   deploy:
     runs-on: ubuntu-latest
@@ -42,7 +42,7 @@ jobs:
         run: cd "${{ github.workspace }}/TestBuildApp"
 
       - name: Publish Application
-        run: dotnet publish -c Release -o ./publish
+        run: dotnet publish -c Release -o ${GITHUB_WORKSPACE}/publish
 
       - name: Deploy Locally
-        run: cp -r ./publish/* /c/Deepak/deployment
+        run: cp -r ${GITHUB_WORKSPACE}/publish/* /c/Deepak/deployment
