@@ -30,25 +30,3 @@ jobs:
 
       - name: Display Bin Contents
         run: ls -R bin
-
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
-
-      - name: Display Directory Contents
-        run: ls -R
-
-      - name: Change to Project Directory
-        run: cd "${{ github.workspace }}/TestBuildApp"
-
-      - name: Publish Application
-        run: dotnet publish -c Release -o ${GITHUB_WORKSPACE}/publish
-
-      - name: Display Publish Contents
-        run: ls -R ${GITHUB_WORKSPACE}/publish
-
-      - name: Deploy Locally
-        run: cp -r ${GITHUB_WORKSPACE}/publish/* /c/Deepak/deployment
