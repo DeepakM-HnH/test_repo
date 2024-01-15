@@ -11,6 +11,9 @@
 # Mono Auto Generated Files
 mono_crash.*
 
+# Exclude files with .vsidx extension
+*.vsidx
+
 # Windows image file caches
 Thumbs.db
 ehthumbs.db
