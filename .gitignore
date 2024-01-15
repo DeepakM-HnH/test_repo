@@ -120,3 +120,4 @@ $RECYCLE.BIN/
 /TestBuildApp/publish/
 *.AssemblyInfo.cs
 *.AssemblyInfoInputs.cache
+/TestBuildApp/obj/Debug/net7.0/TestBuildApp.AssemblyInfoInputs.cache
