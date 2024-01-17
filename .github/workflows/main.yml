@@ -29,5 +29,8 @@ jobs:
       - name: Build Project
         run: dotnet build TestBuildApp/TestBuildApp.sln
 
+      - name: Create Publish Directory
+        run: mkdir -p ${GITHUB_WORKSPACE}/publish
+
       - name: Display Publish Directory Contents
         run: ls -R ${GITHUB_WORKSPACE}/publish
