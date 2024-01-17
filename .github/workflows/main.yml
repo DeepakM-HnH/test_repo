@@ -39,5 +39,6 @@ jobs:
         run: cd "${{ github.workspace }}/TestBuildApp"
 
       - name: Publish Application
-        run: dotnet publish -c Release -o ${GITHUB_WORKSPACE}/publish
+        run: dotnet publish -c Release -o ${GITHUB_WORKSPACE}/publish TestBuildApp.sln
+
 
