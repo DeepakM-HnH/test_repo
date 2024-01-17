@@ -3,16 +3,17 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - master
+      - main
   pull_request:
     branches:
-      - master
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
+
       - name: Checkout Repository
         uses: actions/checkout@v2
 
@@ -23,7 +24,7 @@ jobs:
         run: cd "${{ github.workspace }}"
 
       - name: Restore Dependencies
-        run: dotnet restore TestBuildApp.sln
-        
+        run: dotnet restore TestBuildApp/TestBuildApp.sln
+
       - name: Build Project
-        run: dotnet build TestBuildApp.sln
+        run: dotnet build TestBuildApp/TestBuildApp.sln
