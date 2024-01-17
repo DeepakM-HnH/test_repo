@@ -13,7 +13,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-
       - name: Checkout Repository
         uses: actions/checkout@v2
 
@@ -21,10 +20,39 @@ jobs:
         run: echo "Starting the build process..."
 
       - name: Change to Project Directory
-        run: cd "${{ github.workspace }}"
+        run: cd "${{ github.workspace }}/TestBuildApp"
 
       - name: Restore Dependencies
-        run: dotnet restore TestBuildApp/TestBuildApp.sln
+        run: dotnet restore
 
       - name: Build Project
-        run: dotnet build TestBuildApp/TestBuildApp.sln
+        run: dotnet build
+
+      - name: Create Publish Directory
+        run: mkdir -p ${GITHUB_WORKSPACE}/publish
+
+      - name: Publish Application
+        run: dotnet publish -c Release -o ${GITHUB_WORKSPACE}/publish
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Display Start Message
+        run: echo "Starting the deployment process..."
+
+      - name: Change to Project Directory
+        run: cd "${{ github.workspace }}/TestBuildApp"
+
+      - name: Create Deployment Location
+        run: mkdir -p /path/to/deployment/location
+
+      - name: Copy to Deployment Location
+        run: cp -r ${GITHUB_WORKSPACE}/publish/* /path/to/deployment/location
+
+      - name: Display Deployment Contents
+        run: ls -R /path/to/deployment/location
