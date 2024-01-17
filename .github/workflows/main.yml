@@ -43,5 +43,9 @@ jobs:
 
       - name: Publish Application
         run: dotnet publish -c Release -o ${GITHUB_WORKSPACE}/publish TestBuildApp/TestBuildApp.sln
+       
+      - name: Display Published Artifacts
+        run: ls -R ${GITHUB_WORKSPACE}/publish
+
 
 
