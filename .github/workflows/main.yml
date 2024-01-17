@@ -38,7 +38,9 @@ jobs:
       - name: Change to Project Directory
         run: cd "${{ github.workspace }}/TestBuildApp"
 
-      - name: Publish Application
-        run: dotnet publish -c Release -o ${GITHUB_WORKSPACE}/publish TestBuildApp.sln
+      - name: Display Directory Contents
+        run: ls -R "${{ github.workspace }}/TestBuildApp"
 
+      - name: Publish Application
+        run: dotnet publish -c Release -o ${GITHUB_WORKSPACE}/publish TestBuildApp/src/TestBuildApp.sln
 
