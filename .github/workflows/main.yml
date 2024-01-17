@@ -3,10 +3,10 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - main
+      - master
   pull_request:
     branches:
-      - main
+      - master
 
 jobs:
   build:
@@ -24,7 +24,7 @@ jobs:
         run: cd "${{ github.workspace }}"
 
       - name: Restore Dependencies
-        run: dotnet restore TestBuildApp/TestBuildApp.sln
+        run: dotnet restore TestBuildApp.sln
 
       - name: Build Project
-        run: dotnet build TestBuildApp/TestBuildApp.sln
+        run: dotnet build TestBuildApp.sln
