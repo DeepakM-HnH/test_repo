@@ -35,6 +35,9 @@ jobs:
       - name: Display Publish Directory Contents
         run: ls -R ${GITHUB_WORKSPACE}/publish
 
+      - name: Change to Project Directory
+        run: cd "${{ github.workspace }}/TestBuildApp"
+
       - name: Publish Application
         run: dotnet publish -c Release -o ${GITHUB_WORKSPACE}/publish
 
