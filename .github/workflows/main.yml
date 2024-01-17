@@ -42,5 +42,6 @@ jobs:
         run: ls -R "${{ github.workspace }}/TestBuildApp"
 
       - name: Publish Application
-        run: dotnet publish -c Release -o ${GITHUB_WORKSPACE}/publish TestBuildApp/src/TestBuildApp.sln
+        run: dotnet publish -c Release -o ${GITHUB_WORKSPACE}/publish TestBuildApp/TestBuildApp.sln
+
 
