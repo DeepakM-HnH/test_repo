@@ -55,9 +55,9 @@ jobs:
 
       - name: Change to Project Directory
         run: cd "${{ github.workspace }}/TestBuildApp/Deployement"
-
+        
       - name: Copy to Deployment Location
-        run: cp -r ${GITHUB_WORKSPACE}/publish/* TestBuildApp/Deployement
+        run: cp -r ${GITHUB_WORKSPACE}/TestBuildApp/publish/* TestBuildApp/Deployement
 
       - name: Display Publish Contents
         run: ls -R ${GITHUB_WORKSPACE}/publish
