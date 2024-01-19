@@ -74,8 +74,11 @@ jobs:
         run: ls -R ${GITHUB_WORKSPACE}/publish
         working-directory: ${{ github.workspace }}
 
+      - name: Create Deployment Directory
+        run: mkdir -p "C:/Deepak/deployment/"
+
       - name: Copy to Deployment Location
         run: cp -r ${{ github.workspace }}/publish/* "C:/Deepak/deployment/"
-
+        
       - name: Display Deployment Contents
         run: ls -R "C:/Deepak/deployment"
