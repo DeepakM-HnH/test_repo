@@ -67,8 +67,8 @@ jobs:
       - name: Download Published Artifacts
         uses: actions/download-artifact@v2
         with:
-          name: publish-artifact
-          path: ${GITHUB_WORKSPACE}/publish
+           name: publish-artifact
+           path: ${{ github.workspace }}/publish
 
       - name: Display Downloaded Artifact Contents
         run: ls -R ${GITHUB_WORKSPACE}/publish
