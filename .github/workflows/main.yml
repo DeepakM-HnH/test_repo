@@ -46,6 +46,12 @@ jobs:
       - name: Display Published Artifacts
         run: ls -R ${GITHUB_WORKSPACE}/publish
 
+      - name: Archive Publish Directory
+        uses: actions/upload-artifact@v2
+        with:
+          name: publish-artifact
+          path: ${GITHUB_WORKSPACE}/publish
+
   deploy:
     runs-on: ubuntu-latest
 
@@ -57,6 +63,12 @@ jobs:
 
       - name: Display Start Message
         run: echo "Starting the deployment process..."
+
+      - name: Download Published Artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: publish-artifact
+          path: ${GITHUB_WORKSPACE}/publish
 
       - name: Display Publish Directory Contents
         run: ls -R ${GITHUB_WORKSPACE}/publish
