@@ -57,14 +57,14 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
       - name: Display Start Message
         run: echo "Starting the deployment process..."
 
-      - name: Change to Project Directory
-        run: cd "${{ github.workspace }}/TestBuildApp/Deployment"
-        
       - name: Copy to Deployment Location
-        run: cp -r ${GITHUB_WORKSPACE}/publish/* TestBuildApp/Deployment
+        run: cp -r ${GITHUB_WORKSPACE}/publish/* "C:/Deepak/deployment"
 
       - name: Display Deployment Contents
-        run: ls -R ${GITHUB_WORKSPACE}/TestBuildApp/Deployment
+        run: ls -R "C:/Deepak/deployment"
