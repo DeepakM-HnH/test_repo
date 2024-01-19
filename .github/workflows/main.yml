@@ -13,7 +13,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-
       - name: Checkout Repository
         uses: actions/checkout@v2
 
@@ -49,24 +48,21 @@ jobs:
 
   deploy:
     runs-on: ubuntu-latest
-    
+
     needs: build
-    
+
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v2
+      - name: Checkout Repository
+        uses: actions/checkout@v2
 
-    - name: Display Start Message
-      run: echo "Starting the deployment process..."
+      - name: Display Start Message
+        run: echo "Starting the deployment process..."
 
-    - name: Display Workspace Contents
-      run: ls -R "${GITHUB_WORKSPACE}"
+      - name: Display Publish Directory Contents
+        run: ls -R ${GITHUB_WORKSPACE}/publish
 
-    - name: Display Publish Directory Contents
-      run: ls -R "${GITHUB_WORKSPACE}/publish"
+      - name: Copy to Deployment Location
+        run: cp -r ${GITHUB_WORKSPACE}/publish/* "C:/Deepak/deployment"
 
-    - name: Copy to Deployment Location
-      run: cp -r "${GITHUB_WORKSPACE}/publish" "C:/Deepak/deployment"
-
-    - name: Display Deployment Contents
-      run: ls -R "C:/Deepak/deployment"
+      - name: Display Deployment Contents
+        run: ls -R "C:/Deepak/deployment"
