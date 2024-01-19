@@ -48,9 +48,9 @@ jobs:
 
       - name: Archive Publish Directory
         uses: actions/upload-artifact@v2
-        with:
+        with: 
           name: publish-artifact
-          path: ${GITHUB_WORKSPACE}/publish
+          path: ${{ github.workspace }}/publish
 
   deploy:
     runs-on: ubuntu-latest
