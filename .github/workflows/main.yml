@@ -41,8 +41,10 @@ jobs:
         run: ls -R "${{ github.workspace }}/TestBuildApp"
 
       - name: Publish Application
-        run: dotnet publish -c Release -r win-x64 --self-contained -o ${{ github.workspace }}/publish
-        
+        run: |
+          cd TestBuildApp   # Change to the directory where your project or solution file is located
+          dotnet publish -c Release -r win-x64 --self-contained -o ${{ github.workspace }}/publish
+          
       - name: Debug
         run: |
          echo "Current directory: $PWD"
