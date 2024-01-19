@@ -16,35 +16,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Display Start Message
-        run: echo "Starting the build process..."
-
-      - name: Change to Project Directory
-        run: cd "${{ github.workspace }}"
-
-      - name: Restore Dependencies
-        run: dotnet restore TestBuildApp/TestBuildApp.sln
-
-      - name: Build Project
-        run: dotnet build TestBuildApp/TestBuildApp.sln
-
-      - name: Create Publish Directory
-        run: mkdir -p ${GITHUB_WORKSPACE}/publish
-
-      - name: Display Publish Directory Contents
-        run: ls -R ${GITHUB_WORKSPACE}/publish
-
-      - name: Change to Project Directory
-        run: cd "${{ github.workspace }}/TestBuildApp"
-
-      - name: Display Directory Contents
-        run: ls -R "${{ github.workspace }}/TestBuildApp"
-
-      - name: Publish Application
-        run: dotnet publish -c Release -r win-x64 --self-contained -o ${GITHUB_WORKSPACE}/publish TestBuildApp/TestBuildApp.sln
-       
-      - name: Display Published Artifacts
-        run: ls -R ${GITHUB_WORKSPACE}/publish
+      # ... (other build steps)
 
       - name: Archive Publish Directory
         uses: actions/upload-artifact@v2
@@ -68,16 +40,9 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: publish-artifact
-          path: ${GITHUB_WORKSPACE}/publish
+          path: publish  # Updated path to the artifact directory
 
       - name: Display Publish Directory Contents After Download
         run: ls -R $GITHUB_WORKSPACE/publish
 
-      - name: Display Publish Directory Contents
-        run: ls -R ${GITHUB_WORKSPACE}/publish
-
-      - name: Copy to Deployment Location
-        run: cp -r ${GITHUB_WORKSPACE}/publish/* "C:/Deepak/deployment"
-
-      - name: Display Deployment Contents
-        run: ls -R "C:/Deepak/deployment"
+      # ... (other deploy steps)
