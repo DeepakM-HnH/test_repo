@@ -53,15 +53,20 @@ jobs:
     needs: build
     
     steps:
-    
     - name: Checkout Repository
       uses: actions/checkout@v2
 
     - name: Display Start Message
       run: echo "Starting the deployment process..."
 
+    - name: Display Workspace Contents
+      run: ls -R "${GITHUB_WORKSPACE}"
+
+    - name: Display Publish Directory Contents
+      run: ls -R "${GITHUB_WORKSPACE}/publish"
+
     - name: Copy to Deployment Location
-      run: find "${GITHUB_WORKSPACE}/publish/" -type f -exec cp {} "C:/Deepak/deployment/" \;
+      run: cp -r "${GITHUB_WORKSPACE}/publish" "C:/Deepak/deployment"
 
     - name: Display Deployment Contents
       run: ls -R "C:/Deepak/deployment"
