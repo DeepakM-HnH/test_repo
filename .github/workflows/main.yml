@@ -70,8 +70,9 @@ jobs:
           name: publish-artifact
           path: ${GITHUB_WORKSPACE}/publish
 
-      - name: Display Publish Directory Contents
+      - name: Display Downloaded Artifact Contents
         run: ls -R ${GITHUB_WORKSPACE}/publish
+        working-directory: ${{ github.workspace }}
 
       - name: Copy to Deployment Location
         run: cp -r ${GITHUB_WORKSPACE}/publish/* "C:/Deepak/deployment"
