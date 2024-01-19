@@ -43,3 +43,10 @@ jobs:
       - name: Publish Application
         run: dotnet publish -c Release -r win-x64 --self-contained -o ./publish
         working-directory: TestBuildApp
+
+      - name: Debug
+        run: |
+         echo "Current directory: $PWD"
+         ls -R
+        working-directory: TestBuildApp
+
