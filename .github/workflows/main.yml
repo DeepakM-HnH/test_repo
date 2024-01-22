@@ -47,6 +47,8 @@ jobs:
                       -X GET "https://api.github.com/repos/${{ github.repository }}/pulls/$pr_number" \
                       | jq --raw-output .mergeable)
 
+          echo "Mergeable: $mergeable"
+
           if [[ "$mergeable" == "false" ]]; then
             echo "Pull request is not mergeable. Aborting workflow."
             exit 1
