@@ -1,4 +1,4 @@
-name: CI/CD Pipeline
+name: EdgePlus CI/CD Pipeline
 
 on:
   push:
@@ -13,14 +13,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+
       - name: Checkout Repository
         uses: actions/checkout@v2
 
       - name: Display Start Message
         run: echo "Starting the build process..."
 
+      - name: Run SonarScanner
+        run: sonar-scanner -Dsonar.host.url=http://192.168.16.26:9099 -Dsonar.login=${{ secrets.admin }} -Dsonar.password="${{ secrets.H_H1605_04 }}"
+
       - name: Change to Project Directory
         run: cd "${{ github.workspace }}"
+
 
       - name: Restore Dependencies
         run: dotnet restore TestBuildApp/TestBuildApp.sln
@@ -28,40 +33,6 @@ jobs:
       - name: Build Project
         run: dotnet build TestBuildApp/TestBuildApp.sln
 
-      - name: Create Publish Directory
-        run: mkdir -p ${GITHUB_WORKSPACE}/publish
 
-      - name: Display Publish Directory Contents
-        run: ls -R ${GITHUB_WORKSPACE}/publish
 
-      - name: Change to Project Directory
-        run: cd "${{ github.workspace }}/TestBuildApp"
-
-      - name: Display Directory Contents
-        run: ls -R "${{ github.workspace }}/TestBuildApp"
-
-      - name: Check Mergeability
-        run: |
-          pr_number=$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
-          mergeable=$(curl -s -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-                      -X GET "https://api.github.com/repos/${{ github.repository }}/pulls/$pr_number" \
-                      | jq --raw-output .mergeable)
-
-          echo "Mergeable: $mergeable"
-
-          if [[ "$mergeable" == "false" ]]; then
-            echo "Pull request is not mergeable. Aborting workflow."
-            exit 1
-          fi
-
-      - name: Publish Application
-        run: |
-          cd TestBuildApp   # Change to the directory where your project or solution file is located
-          dotnet publish -c Release -r win-x64 --self-contained -o ${{ github.workspace }}/publish
-          
-      - name: Debug
-        run: |
-         echo "Current directory: $PWD"
-         ls -R
-        working-directory: TestBuildApp
-
+      
