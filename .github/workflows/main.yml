@@ -19,11 +19,16 @@ jobs:
           distribution: 'adopt'
           java-version: '17'
 
-      - name: Set up SonarQube Scanner
-        uses: sonarsource/sonarqube-scan-action@v1
+      - name: Map SonarQube Scanner
+        uses: actions/upload-artifact@v2
         with:
-          args: >
-            -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
-            -Dsonar.projectName=${{ secrets.SONAR_PROJECT_NAME }}
-            -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }}
+          name: sonar-scanner
+          path: 'C:\Users\Deepak Mangal\sonar\sonar-scanner-cli-5.0.1.3006-windows\sonar-scanner-5.0.1.3006-windows\bin'
+
+      - name: Run SonarQube Scanner
+        run: |
+          ./bin/sonar-scanner \
+            -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }} \
+            -Dsonar.projectName=${{ secrets.SONAR_PROJECT_NAME }} \
+            -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }} \
             -Dsonar.login=${{ secrets.SONAR_TOKEN }}
