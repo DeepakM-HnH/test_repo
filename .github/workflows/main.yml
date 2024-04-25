@@ -21,11 +21,10 @@ jobs:
         run: echo "Starting the build process..."
 
       - name: Run SonarScanner
-        run: sonar-scanner -Dsonar.host.url=http://192.168.16.26:9099 -Dsonar.login=${{ secrets.admin }} -Dsonar.password="${{ secrets.H_H1605_04 }}"
+        run: C:\Users\Deepak Mangal\sonar\sonar-scanner-cli-5.0.1.3006-windows\sonar-scanner-5.0.1.3006-windows\bin\sonar-scanner.bat -Dsonar.host.url=http://192.168.16.26:9099 -Dsonar.login=${{ secrets.admin }} -Dsonar.password="${{ secrets.H_H1605_04 }}"
 
       - name: Change to Project Directory
         run: cd "${{ github.workspace }}"
-
 
       - name: Restore Dependencies
         run: dotnet restore TestBuildApp/TestBuildApp.sln
