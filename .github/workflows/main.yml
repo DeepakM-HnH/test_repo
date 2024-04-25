@@ -25,7 +25,9 @@ jobs:
         run: |
           "C:\Users\Deepak Mangal\sonar\sonar-scanner-cli-5.0.1.3006-windows\sonar-scanner-5.0.1.3006-windows\bin\sonar-scanner.bat" \
           -Dsonar.host.url=http://192.168.16.26:9099 \
-          -Dsonar.login=%SONAR_TOKEN%
+          -Dsonar.login=%SONAR_TOKEN% \
+          -Dsonar.projectKey=test_repoaq1sw2de \
+          -Dsonar.projectName=test_repo
 
       - name: Change to Project Directory
         run: cd "${{ github.workspace }}"
