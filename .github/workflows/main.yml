@@ -13,8 +13,6 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      # Other steps for building and testing your project
-
       - name: SonarQube Scan
         run: |
           sonar-scanner \
