@@ -21,11 +21,12 @@ jobs:
         run: echo "Starting the build process..."
 
       - name: Run SonarScanner
-        run: sonar-scanner -Dsonar.host.url=http://192.168.16.26:9099 -Dsonar.login=${{ secrets.admin }} -Dsonar.password="${{ secrets.H_H1605_04 }}"
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: sonar-scanner -Dsonar.host.url=http://192.168.16.26:9099 -Dsonar.login=$SONAR_TOKEN
 
       - name: Change to Project Directory
         run: cd "${{ github.workspace }}"
-
 
       - name: Restore Dependencies
         run: dotnet restore TestBuildApp/TestBuildApp.sln
