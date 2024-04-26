@@ -14,15 +14,6 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Setup JDK
-      uses: actions/setup-java@v2
-      with:
-        java-version: 11
-        distribution: 'adopt'
-
-    - name: Change directory
-      run: cd path/to/your/project
-
     - name: Cache SonarQube packages
       uses: actions/cache@v2
       with:
@@ -30,9 +21,15 @@ jobs:
         key: ${{ runner.os }}-sonar
         restore-keys: ${{ runner.os }}-sonar
 
+    - name: Install SonarQube scanner
+      run: |
+        curl -L -o sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-5.0.1.3006-windows.zip
+        unzip sonar-scanner.zip -d sonar-scanner
+        echo "SonarScanner installed successfully."
+
     - name: Build and analyze with Maven
       run: |
-        mvn clean verify sonar:sonar \
+        sonar-scanner/bin/sonar-scanner \
           -Dsonar.projectKey=test_repoaq1sw2de \
           -Dsonar.host.url=http://192.168.16.26:9099 \
           -Dsonar.login=${{ secrets.SONAR_TOKEN }}
