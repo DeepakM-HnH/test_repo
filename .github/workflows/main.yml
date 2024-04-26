@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: Check SonarQube Server
         run: |
-          response=$(curl -s -o /dev/null -w "%{http_code}" http://your-sonarqube-url)
+          response=$(curl -s -o /dev/null -w "%{http_code}" http://192.168.16.26:9099/)
           if [ $response -eq 200 ]; then
             echo "SonarQube server is up and running."
           else
