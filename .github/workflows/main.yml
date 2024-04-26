@@ -20,7 +20,7 @@ jobs:
       
     - name: Set SonarScanner Path
       run: |
-        echo ##[set-env name=PATH;]C:\sonar-scanner\bin;%PATH%
+        echo "PATH=C:\sonar-scanner\bin;%PATH%" > .env
       
     - name: Run SonarScanner
       run: |
