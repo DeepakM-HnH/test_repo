@@ -29,7 +29,7 @@ jobs:
 
     - name: Build and analyze with SonarScanner
       run: |
-        C:\sonar-scanner-5.0.1.3006-windows\bin\sonar-scanner.bat \
-          -Dsonar.projectKey=test_repoaq1sw2de \
-          -Dsonar.host.url=http://192.168.16.26:9099 \
+        C:\\sonar-scanner-5.0.1.3006-windows\\bin\\sonar-scanner.bat ^
+          -Dsonar.projectKey=test_repoaq1sw2de ^
+          -Dsonar.host.url=http://192.168.16.26:9099 ^
           -Dsonar.login=${{ secrets.SONAR_TOKEN }}
