@@ -26,10 +26,11 @@ jobs:
         key: ${{ runner.os }}-sonar
         restore-keys: ${{ runner.os }}-sonar
 
-    - name: Build and analyze with Maven
-      run: |
-        mvn clean verify sonar:sonar \
+    - name: Build with Maven
+      run: mvn clean verify
+
+    - name: Analyze with SonarQube
+      run: mvn sonar:sonar \
           -Dsonar.projectKey=test_repoaq1sw2de \
           -Dsonar.host.url=http://192.168.16.26:9099 \
           -Dsonar.login=${{ secrets.SONAR_TOKEN }}
-
