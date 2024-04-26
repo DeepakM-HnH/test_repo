@@ -37,4 +37,3 @@ jobs:
         -Dsonar.host.url=http://192.168.16.26:9099 \
         -Dsonar.login=${{ secrets.SONAR_TOKEN }}
       shell: bash
-
