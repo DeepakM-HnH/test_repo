@@ -5,8 +5,21 @@ on:
     branches:
       - main
 
-
 jobs:
+  checkSonarQubeServer:
+    name: Check SonarQube Server
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check SonarQube Server
+        run: |
+          response=$(curl -s -o /dev/null -w "%{http_code}" http://your-sonarqube-url)
+          if [ $response -eq 200 ]; then
+            echo "SonarQube server is up and running."
+          else
+            echo "Failed to connect to SonarQube server. HTTP Status code: $response"
+            exit 1
+          fi
+
   build:
     name: Build
     runs-on: windows-latest
