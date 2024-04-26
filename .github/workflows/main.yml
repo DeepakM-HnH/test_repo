@@ -20,8 +20,8 @@ jobs:
       
     - name: Set PATH variable
       run: |
-        echo 'C:\sonar-scanner\bin' >> $GITHUB_PATH
+        echo 'C:\sonar-scanner\bin' >> $env:Path
       
     - name: Run SonarScanner
       run: |
-        sonar-scanner.bat -Dsonar.projectKey=test_repoaq1sw2de -Dsonar.sources=src -Dsonar.host.url=http://192.168.16.26:9099 -Dsonar.login=sqp_75a485ca7f0854c5b0aa32243614bca5a666558e
+        C:\sonar-scanner\bin\sonar-scanner.bat -Dsonar.projectKey=test_repoaq1sw2de -Dsonar.sources=src -Dsonar.host.url=http://192.168.16.26:9099 -Dsonar.login=sqp_75a485ca7f0854c5b0aa32243614bca5a666558e
