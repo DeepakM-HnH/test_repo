@@ -17,8 +17,11 @@ jobs:
     - name: Setup JDK
       uses: actions/setup-java@v2
       with:
-        java-version: '11'  # Change this to the required JDK version
+        java-version: 11
         distribution: 'adopt'
+
+    - name: Change directory
+      run: cd path/to/your/project
 
     - name: Cache SonarQube packages
       uses: actions/cache@v2
