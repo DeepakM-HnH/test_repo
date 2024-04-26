@@ -1,17 +1,18 @@
-name: Check Secrets
+name: Check SonarQube Connection
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:  # Trigger the workflow manually
 
 jobs:
-  check-secrets:
+  check-sonarqube-connection:
     runs-on: ubuntu-latest
     steps:
-      - name: Check Secrets
+      - name: Check Connection
         run: |
-          echo "SONAR_PROJECT_KEY: ${{ secrets.SONAR_PROJECT_KEY }}"
-          echo "SONAR_PROJECT_NAME: ${{ secrets.SONAR_PROJECT_NAME }}"
-          echo "SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}"
-          echo "SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}"
+          response=$(curl -s -o /dev/null -w "%{http_code}" "${{ secrets.SONAR_HOST_URL }}/api/server/version")
+          if [ $response -eq 200 ]; then
+            echo "SonarQube server is up and running."
+          else
+            echo "Failed to connect to SonarQube server. HTTP Status code: $response"
+            exit 1
+          fi
