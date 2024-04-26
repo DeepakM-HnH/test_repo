@@ -13,14 +13,14 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v2
       
-    - name: Download SonarScanner
+    - name: Download and Extract SonarScanner
       run: |
         curl -L -o sonar-scanner-cli.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.6.2.2472-windows.zip
         Expand-Archive sonar-scanner-cli.zip -DestinationPath C:\sonar-scanner
       
     - name: Set SonarScanner Path
       run: |
-        echo "PATH=C:\sonar-scanner\bin;%PATH%" > .env
+        echo "##[set-env name=PATH;]C:\sonar-scanner\bin;%PATH%"
       
     - name: Run SonarScanner
       run: |
