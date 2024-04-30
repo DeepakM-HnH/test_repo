@@ -13,7 +13,17 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v2
 
-    - name: Execute SonarScanner
+    - name: Print Current Directory
       run: |
-        cd "C:\sonar-scanner-5.0.1.3006-windows\bin"
-        .\sonar-scanner.bat -Dsonar.projectKey=test_repoaq1sw2de -Dsonar.sources=src -Dsonar.host.url=http://192.168.16.26:9099 -Dsonar.login=sqp_75a485ca7f0854c5b0aa32243614bca5a666558e
+        Get-Location
+
+    - name: Change Directory to SonarScanner
+      run: |
+        Set-Location "C:\sonar-scanner-5.0.1.3006-windows\bin"
+
+    - name: Print Current Directory After Change
+      run: |
+        Get-Location
+
+    - name: Execute SonarScanner
+      run: .\sonar-scanner.bat -Dsonar.projectKey=test_repoaq1sw2de -Dsonar.sources=src -Dsonar.host.url=http://192.168.16.26:9099 -Dsonar.login=sqp_75a485ca7f0854c5b0aa32243614bca5a666558e
