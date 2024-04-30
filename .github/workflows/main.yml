@@ -15,10 +15,10 @@ jobs:
       
     - name: Download SonarScanner
       run: |
-        mkdir C:\Users\runner\sonar-scanner
-        Invoke-WebRequest -Uri 'https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.6.2.2472-windows.zip' -OutFile 'C:\Users\runner\sonar-scanner\sonar-scanner-cli.zip'
-        Expand-Archive -Path 'C:\Users\runner\sonar-scanner\sonar-scanner-cli.zip' -DestinationPath 'C:\Users\runner\sonar-scanner'
+        New-Item -Path 'C:\sonar-scanner' -ItemType Directory -Force
+        Invoke-WebRequest -Uri 'https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.6.2.2472-windows.zip' -OutFile 'C:\sonar-scanner\sonar-scanner-cli.zip'
+        Expand-Archive -Path 'C:\sonar-scanner\sonar-scanner-cli.zip' -DestinationPath 'C:\sonar-scanner'
 
     - name: Execute SonarScanner
       run: |
-        C:\Users\runner\sonar-scanner\sonar-scanner\bin\sonar-scanner.bat -Dsonar.projectKey=test_repoaq1sw2de -Dsonar.sources=src -Dsonar.host.url=http://192.168.16.26:9099 -Dsonar.login=sqp_75a485ca7f0854c5b0aa32243614bca5a666558e
+        C:\sonar-scanner\sonar-scanner\bin\sonar-scanner.bat -Dsonar.projectKey=test_repoaq1sw2de -Dsonar.sources=src -Dsonar.host.url=http://192.168.16.26:9099 -Dsonar.login=sqp_75a485ca7f0854c5b0aa32243614bca5a666558e
