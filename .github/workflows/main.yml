@@ -15,9 +15,10 @@ jobs:
       
     - name: Download SonarScanner
       run: |
+        mkdir C:\sonar-scanner
         curl -L -o sonar-scanner-cli.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.6.2.2472-windows.zip
         Expand-Archive sonar-scanner-cli.zip -DestinationPath C:\sonar-scanner
-      
+        
     - name: Execute SonarScanner
       run: |
         C:\sonar-scanner\bin\sonar-scanner.bat -Dsonar.projectKey=test_repoaq1sw2de -Dsonar.sources=src -Dsonar.host.url=http://192.168.16.26:9099 -Dsonar.login=sqp_75a485ca7f0854c5b0aa32243614bca5a666558e
