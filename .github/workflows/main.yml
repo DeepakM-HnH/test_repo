@@ -13,17 +13,23 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v2
       
-    - name: Set up environment
+    - name: Check if directory exists
       run: |
-        $dir = "$env:USERPROFILE\sonar-scanner"
-        mkdir $dir
+        Test-Path -Path 'C:\sonar-scanner'
+
+    - name: Create Directory
+      run: |
+        New-Item -Path 'C:\sonar-scanner' -ItemType Directory -Force
+
+    - name: Check if directory was created
+      run: |
+        Test-Path -Path 'C:\sonar-scanner'
 
     - name: Download SonarScanner
       run: |
-        Invoke-WebRequest -Uri 'https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.6.2.2472-windows.zip' -OutFile "$env:USERPROFILE\sonar-scanner\sonar-scanner-cli.zip"
-        Expand-Archive -Path "$env:USERPROFILE\sonar-scanner\sonar-scanner-cli.zip" -DestinationPath "$env:USERPROFILE\sonar-scanner"
+        Invoke-WebRequest -Uri 'https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.6.2.2472-windows.zip' -OutFile 'C:\sonar-scanner\sonar-scanner-cli.zip'
+        Expand-Archive -Path 'C:\sonar-scanner\sonar-scanner-cli.zip' -DestinationPath 'C:\sonar-scanner'
 
     - name: Execute SonarScanner
       run: |
-        $scannerDir = "$env:USERPROFILE\sonar-scanner\sonar-scanner\bin"
-        & "$scannerDir\sonar-scanner.bat" -Dsonar.projectKey=test_repoaq1sw2de -Dsonar.sources=src -Dsonar.host.url=http://192.168.16.26:9099 -Dsonar.login=sqp_75a485ca7f0854c5b0aa32243614bca5a666558e
+        C:\sonar-scanner\sonar-scanner\bin\sonar-scanner.bat -Dsonar.projectKey=test_repoaq1sw2de -Dsonar.sources=src -Dsonar.host.url=http://192.168.16.26:9099 -Dsonar.login=sqp_75a485ca7f0854c5b0aa32243614bca5a666558e
