@@ -3,12 +3,11 @@ name: SonarQube Analysis
 on:
   push:
     branches:
-      - main  # Adjust branch name as needed
+      - main
 
 jobs:
   sonarqube-analysis:
-    runs-on: windows-latest  # Running on Windows since SonarQube scanner is on Windows 10
-
+    runs-on: windows-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
