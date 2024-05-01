@@ -7,24 +7,20 @@ on:
 
 jobs:
   sonarqube-analysis:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest  # Running on Windows since SonarQube scanner is on Windows 10
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up SonarQube Scanner
-        uses: sonarsource/setup-sonarqube@v1
+      - name: Set up JDK
+        uses: actions/setup-java@v2
         with:
-          sonarqube-version: '8.x'
-          server-url: ${{ secrets.SONAR_HOST_URL }}
-          token: ${{ secrets.SONAR_TOKEN }}
+          java-version: '17'
 
-      - name: Run SonarQube analysis
-        env:
-          SONAR_PROJECT_KEY: test_repoaq1sw2de
+      - name: SonarQube Scan
         run: |
-          sonar-scanner \
-            -Dsonar.projectKey=$SONAR_PROJECT_KEY \
-            -Dsonar.host.url=$SONAR_HOST_URL \
-            -Dsonar.token=$SONAR_TOKEN
+          sonar-scanner.bat \
+            -Dsonar.projectKey=test_repoaq1sw2de \
+            -Dsonar.host.url=http://localhost:9000 \
+            -Dsonar.login=sqp_b1b9028638217f797048a9570753e3a125591c51
