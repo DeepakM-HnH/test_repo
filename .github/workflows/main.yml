@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -15,4 +15,4 @@ jobs:
       # Use the defined path in the subsequent steps
       - name: Run SonarQube analysis
         run: |
-          C:\sonar-scanner\bin\sonar-scanner.bat -Dsonar.projectKey=test_repoaq1sw2de -Dsonar.host.url=http://localhost:9000 -Dsonar.token=sqp_b1b9028638217f797048a9570753e3a125591c51
+          sonar-scanner -Dsonar.login=sqp_b1b9028638217f797048a9570753e3a125591c51 -Dsonar.projectKey=test_repoaq1sw2de
