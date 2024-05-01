@@ -3,11 +3,12 @@ name: SonarQube Analysis
 on:
   push:
     branches:
-      - main
+      - main  # Adjust branch name as needed
 
 jobs:
   sonarqube-analysis:
-    runs-on: windows-latest
+    runs-on: windows-latest  # Running on Windows since SonarQube scanner is on Windows 10
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -16,6 +17,8 @@ jobs:
         uses: actions/setup-java@v2
         with:
           java-version: '17'
+          distribution: 'adopt'  # Specify the Java distribution to use
+          architecture: 'x64'
 
       - name: SonarQube Scan
         run: |
