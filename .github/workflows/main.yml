@@ -1,46 +1,23 @@
-name: Build
+name: SonarQube Analysis
 
 on:
   push:
     branches:
-      - main
-
+      - main  # Adjust branch name as needed
 
 jobs:
   build:
-    name: Build and analyze
-    runs-on: windows-latest
-    
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
-      - name: Set up JDK 17
-        uses: actions/setup-java@v1
-        with:
-          java-version: 17
-      - name: Cache SonarQube packages
-        uses: actions/cache@v1
-        with:
-          path: ~\.sonar\cache
-          key: ${{ runner.os }}-sonar
-          restore-keys: ${{ runner.os }}-sonar
-      - name: Cache SonarQube scanner
-        id: cache-sonar-scanner
-        uses: actions/cache@v1
-        with:
-          path: .\.sonar\scanner
-          key: ${{ runner.os }}-sonar-scanner
-          restore-keys: ${{ runner.os }}-sonar-scanner
-      - name: Install SonarQube scanner
-        if: steps.cache-sonar-scanner.outputs.cache-hit != 'true'
-        shell: powershell
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Set up environment variables or paths
+      - name: Set up environment
         run: |
-          New-Item -Path .\.sonar\scanner -ItemType Directory
-          dotnet tool update dotnet-sonarscanner --tool-path .\.sonar\scanner
-      - name: Build and analyze
-        shell: powershell
+          echo "export PATH_TO_SONAR_SCANNER=c:/sonar-scanner/bin/sonar-scanner" >> $GITHUB_ENV
+
+      # Use the defined path in the subsequent steps
+      - name: Run SonarQube analysis
         run: |
-          .\.sonar\scanner\dotnet-sonarscanner begin /k:"test_repoaq1sw2de" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="${{ secrets.SONAR_HOST_URL }}"
-          dotnet build
-          .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
+          $PATH_TO_SONAR_SCANNER/sonar-scanner -Dsonar.projectKey=test_repoaq1sw2de -Dsonar.host.url=http://localhost:9000 -Dsonar.token=sqp_b1b9028638217f797048a9570753e3a125591c51
