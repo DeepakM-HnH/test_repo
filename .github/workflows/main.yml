@@ -1,15 +1,21 @@
-name: Display Text File Content
+name: SonarQube Analysis
 
 on:
   push:
     branches:
-      - main
+      - main  # Adjust branch name as needed
 
 jobs:
-  display_content:
-    runs-on: windows-latest
-
+  build:
+    runs-on: ubuntu-latest
     steps:
-      - name: Read and display text file content
-        run: |
-          Get-Content "C:\Users\Deepak Mangal\Documents\1.txt"
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Add Sonar Scanner path to $GITHUB_PATH
+      - name: Set up Sonar Scanner path
+        run: echo "C:\sonar-scanner\bin" >> $GITHUB_PATH
+
+      # Verify Sonar Scanner path
+      - name: Verify Sonar Scanner path
+        run: sonar-scanner -h
