@@ -15,9 +15,9 @@ jobs:
       # Set up environment variables or paths
       - name: Set up environment
         run: |
-          echo "export PATH_TO_SONAR_SCANNER=c:/sonar-scanner/bin/sonar-scanner" >> $GITHUB_ENV
+          echo "export PATH_TO_SONAR_SCANNER=c:/sonar-scanner/bin" >> $GITHUB_ENV
 
       # Use the defined path in the subsequent steps
       - name: Run SonarQube analysis
         run: |
-          $PATH_TO_SONAR_SCANNER/sonar-scanner -Dsonar.projectKey=test_repoaq1sw2de -Dsonar.host.url=http://localhost:9000 -Dsonar.token=sqp_b1b9028638217f797048a9570753e3a125591c51
+          %PATH_TO_SONAR_SCANNER%\sonar-scanner.bat -Dsonar.projectKey=test_repoaq1sw2de -Dsonar.host.url=http://localhost:9000 -Dsonar.token=sqp_b1b9028638217f797048a9570753e3a125591c51
