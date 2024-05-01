@@ -12,4 +12,4 @@ jobs:
     steps:
       - name: Read and display text file content
         run: |
-          Get-Content "C:\Users\Deepak Mangal\1.txt"
+          Get-Content "C:\Users\Deepak Mangal\Documents\1.txt"
