@@ -15,11 +15,6 @@ jobs:
       
     - name: Set up environment
       run: |
-        Write-Host "Path: $env:PATH"
-        Write-Host "Sonar Scanner Path: $env:SONAR_SCANNER_PATH"
-        
-    - name: Run SonarScanner
-      run: |
-        & $env:SONAR_SCANNER_PATH/sonar-scanner -Dsonar.projectKey=test_repoaq1sw2de -Dsonar.host.url=http://localhost:9000 -Dsonar.login=sqp_b1b9028638217f797048a9570753e3a125591c51
-      env:
-        Sonar_Scanner_Path: $env:SONAR_SCANNER_PATH
+        # Use PowerShell to access environment variables
+        echo "Path: $env:PATH"
+        echo "SoanrScannerPath: $env:SONAR_SCANNER_PATH"  
