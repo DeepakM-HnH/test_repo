@@ -17,4 +17,4 @@ jobs:
       run: |
         # Use PowerShell to access environment variables
         echo "Path: $env:PATH"
-        echo "SoanrScannerPath: $env:SONAR_SCANNER_PATH"  
+        echo "GitHub Token: $env:SONAR_HOST_URL"
