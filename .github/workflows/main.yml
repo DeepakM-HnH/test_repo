@@ -16,6 +16,7 @@ jobs:
     - name: Set up environment
       run: |
         # Use PowerShell to access environment variables
+        Get-ChildItem Env:
         echo "Path: $env:PATH"
         echo "Sonar Host URL: $env:SONAR_HOST_URL"
 
