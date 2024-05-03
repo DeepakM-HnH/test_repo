@@ -15,7 +15,6 @@ jobs:
       
     - name: Set up environment
       run: |
-        echo "Path: $PATH"
         echo "Sonar Scanner Path: $SONAR_SCANNER_PATH"
         
     - name: Run SonarScanner
