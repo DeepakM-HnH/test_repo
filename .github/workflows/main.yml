@@ -16,6 +16,6 @@ jobs:
     - name: Set up environment
       run: |
         # Use PowerShell to access environment variables
-        Get-ChildItem Env:
+        Get-ChildItem Env: | ForEach-Object { Write-Host "$($_.Name): $($_.Value)" }
         echo "Path: $env:PATH"
         echo "Sonar Host URL: $env:SONAR_HOST_URL"
