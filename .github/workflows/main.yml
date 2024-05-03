@@ -35,3 +35,4 @@ jobs:
         fi
       env:
         SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+        SONAR_SCANNER_PATH: ${{ secrets.SONAR_SCANNER_PATH }}
