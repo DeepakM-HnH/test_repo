@@ -29,9 +29,9 @@ jobs:
     - name: Run SonarScanner
       run: |
         if [ -x "$(command -v powershell)" ]; then
-          sonar-scanner -Dsonar.projectKey=test_repoaq1sw2de -Dsonar.host.url=http://localhost:9000 -Dsonar.login=sqp_b1b9028638217f797048a9570753e3a125591c51
+          sonar-scanner -Dsonar.projectKey=test_repoaq1sw2de -Dsonar.host.url=$SONAR_HOST_URL -Dsonar.login=$SONAR_TOKEN
         else
-          /c/sonar-scanner/bin/sonar-scanner -Dsonar.projectKey=test_repoaq1sw2de -Dsonar.host.url=http://localhost:9000 -Dsonar.login=sqp_b1b9028638217f797048a9570753e3a125591c51
+          $SONAR_SCANNER_PATH/sonar-scanner -Dsonar.projectKey=test_repoaq1sw2de -Dsonar.host.url=$SONAR_HOST_URL -Dsonar.login=$SONAR_TOKEN
         fi
       env:
         SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
