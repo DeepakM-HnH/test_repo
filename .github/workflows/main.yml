@@ -23,17 +23,17 @@ jobs:
           # Use Bash commands to access environment variables
           echo "Path: $PATH"
           echo "Sonar Host URL: $SONAR_HOST_URL"
-          echo "Sonar Path: $(echo $SONAR_SCANNER_PATH | sed 's/\\//\//g')"
+          echo "Sonar Path: ${SONAR_SCANNER_PATH//\\//}"
         fi
 
     - name: Run SonarScanner
       run: |
         if [ -x "$(command -v powershell)" ]; then
           echo "Sonar Host URL: $SONAR_HOST_URL"
-          echo "Sonar Path: $(echo $SONAR_SCANNER_PATH | sed 's/\\//\//g')"
+          echo "Sonar Path: ${SONAR_SCANNER_PATH//\\//}"
         else
           echo "Sonar Host URL: $SONAR_HOST_URL"
-          echo "Sonar Path: $(echo $SONAR_SCANNER_PATH | sed 's/\\//\//g')"
+          echo "Sonar Path: ${SONAR_SCANNER_PATH//\\//}"
         fi
       env:
         SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
