@@ -15,12 +15,22 @@ jobs:
       
     - name: Set up environment
       run: |
-        # Check if PowerShell is available
         if [ -x "$(command -v powershell)" ]; then
           # Use PowerShell to access environment variables
           powershell -Command "Get-ChildItem Env: | ForEach-Object { Write-Host "$($_.Name): $($_.Value)" }"
         else
-          # Fallback to Git Bash
+          echo "PowerShell is not available, falling back to Git Bash"
+          # Use Bash commands to access environment variables
           echo "Path: $PATH"
           echo "Sonar Host URL: $SONAR_HOST_URL"
         fi
+
+    - name: Run SonarScanner
+      run: |
+        if [ -x "$(command -v powershell)" ]; then
+          sonar-scanner -Dsonar.projectKey=test_repoaq1sw2de -Dsonar.host.url=http://localhost:9000 -Dsonar.login=sqp_b1b9028638217f797048a9570753e3a125591c51
+        else
+          /c/sonar-scanner/bin/sonar-scanner -Dsonar.projectKey=test_repoaq1sw2de -Dsonar.host.url=http://localhost:9000 -Dsonar.login=sqp_b1b9028638217f797048a9570753e3a125591c51
+        fi
+      env:
+        SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
