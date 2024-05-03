@@ -23,6 +23,7 @@ jobs:
           # Use Bash commands to access environment variables
           echo "Path: $PATH"
           echo "Sonar Host URL: $SONAR_HOST_URL"
+          echo "Sonar Path: $SONAR_SCANNER_PATH"
         fi
 
     - name: Run SonarScanner
