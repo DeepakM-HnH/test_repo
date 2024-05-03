@@ -15,5 +15,12 @@ jobs:
       
     - name: Set up environment
       run: |
-        # Use PowerShell to access environment variables
-        powershell -Command "Get-ChildItem Env: | ForEach-Object { Write-Host "$($_.Name): $($_.Value)" }" || { echo "Path: $PATH"; echo "Sonar Host URL: $SONAR_HOST_URL"; }
+        # Check if PowerShell is available
+        if [ -x "$(command -v powershell)" ]; then
+          # Use PowerShell to access environment variables
+          powershell -Command "Get-ChildItem Env: | ForEach-Object { Write-Host "$($_.Name): $($_.Value)" }"
+        else
+          # Fallback to Git Bash
+          echo "Path: $PATH"
+          echo "Sonar Host URL: $SONAR_HOST_URL"
+        fi
