@@ -1,33 +1,36 @@
-name: SonarQube Connectivity Test
+name: SonarQube Scan
 
 on:
   push:
     branches:
       - main
+      - master
+      - develop
+      - 'releases/**'
+  pull_request:
+    types: [opened, synchronize, reopened]
 
 jobs:
-  connectivity-test:
+  sonarqube:
     runs-on: ubuntu-latest
-    
+
     steps:
     - name: Check out code
       uses: actions/checkout@v2
       
-    - name: Test SonarQube Connectivity
+    - name: Set up environment variables
       run: |
-        # Define the SonarQube server URL and port
-        SONARQUBE_SERVER="http://192.168.89.241:9000"
-        # Define your SonarQube token
-        SONARQUBE_TOKEN="${{ secrets.SONARQUBE_TOKEN }}"
+        echo "Setting up environment variables..."
+        export SONAR_HOST_URL='http://192.168.89.241:9000'
+        export SONAR_TOKEN='sqp_b1b9028638217f797048a9570753e3a125591c51'
+        echo "SONAR_HOST_URL: $SONAR_HOST_URL"
+        echo "SONAR_TOKEN: $SONAR_TOKEN"
 
-        # Test connectivity using curl with token
-        echo "Testing connectivity to SonarQube server at: $SONARQUBE_SERVER with token"
-        curl --head --fail --silent --show-error -H "Authorization: Bearer $SONARQUBE_TOKEN" "$SONARQUBE_SERVER"
-
-        # Check the exit status of curl command
-        if [ $? -eq 0 ]; then
-            echo "Connectivity test successful. SonarQube server is reachable with token."
-        else
-            echo "Connectivity test failed. SonarQube server is not reachable with token."
-            exit 1
-        fi
+    - name: Run SonarQube Scan
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+      run: |
+        echo "Running SonarQube Scan..."
+        set -e
+        /usr/bin/docker run --name sonarqube_scan --rm -e "SONAR_TOKEN" -e "SONAR_HOST_URL" -v "/var/run/docker.sock":"/var/run/docker.sock" -v "${{ runner.workspace }}":"/github/workspace" sonarsource/sonarqube-scan-action:latest
