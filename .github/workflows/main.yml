@@ -28,16 +28,11 @@ jobs:
 
     - name: Run SonarScanner
       run: |
-       if [ -x "$(command -v powershell)" ]; then
-       echo "Sonar Host URL: $SONAR_HOST_URL"
-       echo "Sonar Path: $SONAR_SCANNER_PATH"
-       "$SONAR_SCANNER_PATH\sonar-scanner" -Dsonar.projectKey=test_repoaq1sw2de -Dsonar.host.url=$SONAR_HOST_URL -Dsonar.token=sqp_b1b9028638217f797048a9570753e3a125591c51
-       else
-       echo "Sonar Host URL: $SONAR_HOST_URL"
-       echo "Sonar Path: $SONAR_SCANNER_PATH"
-       "$SONAR_SCANNER_PATH/sonar-scanner" -Dsonar.projectKey=test_repoaq1sw2de -Dsonar.host.url=$SONAR_HOST_URL -Dsonar.token=sqp_b1b9028638217f797048a9570753e3a125591c51
-       fi
-       shell: /usr/bin/bash -e {0}
-       env:
-       SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-       SONAR_SCANNER_PATH: C:\sonar-scanner
+        echo "Sonar Host URL: $SONAR_HOST_URL"
+        echo "Sonar Path: $SONAR_SCANNER_PATH"
+        "$SONAR_SCANNER_PATH\bin\sonar-scanner" -Dsonar.projectKey=test_repoaq1sw2de -Dsonar.host.url=$SONAR_HOST_URL -Dsonar.token=sqp_b1b9028638217f797048a9570753e3a125591c51
+        shell: /usr/bin/bash -e {0}
+        env:
+        SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+        SONAR_SCANNER_PATH: C:\sonar-scanner
+
