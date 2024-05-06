@@ -21,7 +21,7 @@ jobs:
     - name: Set up environment variables
       run: |
         echo "Setting up environment variables..."
-        export SONAR_HOST_URL='http://192.168.89.241:9000'
+        export SONAR_HOST_URL='http://localhost/:9000'
         export SONAR_TOKEN='sqp_b1b9028638217f797048a9570753e3a125591c51'
         echo "SONAR_HOST_URL: $SONAR_HOST_URL"
         echo "SONAR_TOKEN: $SONAR_TOKEN"
