@@ -1,9 +1,11 @@
 name: Main Workflow
-
 on:
   push:
     branches:
       - main
+      - master
+      - develop
+      - 'releases/**'
   pull_request:
     types: [opened, synchronize, reopened]
 
@@ -13,15 +15,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          # Disabling shallow clones is recommended for improving the relevancy of reporting
           fetch-depth: 0
+      - name: Set up environment variables
+        run: |
+          echo "Setting up environment variables..."
+          export SONAR_HOST_URL=http://192.168.89.241:9000
+          export SONAR_TOKEN=sqp_b1b9028638217f797048a9570753e3a125591c51
       - name: SonarQube Scan
         uses: sonarsource/sonarqube-scan-action@master
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-        with:
-          args: >
-            -Dsonar.projectKey=test_repoaq1sw2de
-            -Dsonar.host.url=http://localhost:9000
-            -Dsonar.token=sqp_b1b9028638217f797048a9570753e3a125591c51
