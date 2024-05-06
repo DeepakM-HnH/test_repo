@@ -25,12 +25,9 @@ jobs:
         export SONAR_TOKEN='sqp_b1b9028638217f797048a9570753e3a125591c51'
         echo "SONAR_HOST_URL: $SONAR_HOST_URL"
         echo "SONAR_TOKEN: $SONAR_TOKEN"
-
+        
     - name: Run SonarQube Scan
+      run: echo "Running SonarQube Scan..."
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-      run: |
-        echo "Running SonarQube Scan..."
-        set -e
-        /usr/bin/docker run --name sonarqube_scan --rm -e "SONAR_TOKEN" -e "SONAR_HOST_URL" -v "/var/run/docker.sock":"/var/run/docker.sock" -v "${{ runner.workspace }}":"/github/workspace" sonarsource/sonarqube-scan-action:latest
