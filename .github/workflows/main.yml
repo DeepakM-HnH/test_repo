@@ -1,33 +1,33 @@
-name: SonarQube Scan
+name: SonarQube Connectivity Test
 
 on:
   push:
     branches:
       - main
-      - master
-      - develop
-      - 'releases/**'
-  pull_request:
-      types: [opened, synchronize, reopened]
 
 jobs:
-  sonarqube:
+  connectivity-test:
     runs-on: ubuntu-latest
     
     steps:
     - name: Check out code
       uses: actions/checkout@v2
       
-    - name: Set up environment variables
+    - name: Test SonarQube Connectivity
       run: |
-        echo "Setting up environment variables..."
-        export SONAR_HOST_URL=http://192.168.89.241:9000
-        export SONAR_TOKEN=sqp_b1b9028638217f797048a9570753e3a125591c51
-        echo "SONAR_HOST_URL: $SONAR_HOST_URL"
-        echo "SONAR_TOKEN: $SONAR_TOKEN"
+        # Define the SonarQube server URL and port
+        SONARQUBE_SERVER="http://192.168.89.241:9000"
+        # Define your SonarQube token
+        SONARQUBE_TOKEN="${{ secrets.SONARQUBE_TOKEN }}"
 
-    - name: Run SonarQube Scan
-      uses: sonarsource/sonarqube-scan-action@master
-      env:
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+        # Test connectivity using curl with token
+        echo "Testing connectivity to SonarQube server at: $SONARQUBE_SERVER with token"
+        curl --head --fail --silent --show-error -H "Authorization: Bearer $SONARQUBE_TOKEN" "$SONARQUBE_SERVER"
+
+        # Check the exit status of curl command
+        if [ $? -eq 0 ]; then
+            echo "Connectivity test successful. SonarQube server is reachable with token."
+        else
+            echo "Connectivity test failed. SonarQube server is not reachable with token."
+            exit 1
+        fi
