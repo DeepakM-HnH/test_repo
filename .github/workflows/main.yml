@@ -1,11 +1,9 @@
 name: Main Workflow
+
 on:
   push:
     branches:
       - main
-      - master
-      - develop
-      - 'releases/**'
   pull_request:
     types: [opened, synchronize, reopened]
 
@@ -13,13 +11,15 @@ jobs:
   sonarqube:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - name: Set up environment variables
+      - uses: actions/checkout@v2
+
+      - name: Set up SonarQube environment variables
         run: |
-          echo "Setting up environment variables..."
-          export SONAR_HOST_URL=http://192.168.89.241:9000
-          export SONAR_TOKEN=sqp_b1b9028638217f797048a9570753e3a125591c51
+          echo "Setting up SonarQube environment variables..."
+          echo "export SONAR_HOST_URL=${{ secrets.SONAR_HOST_URL }}" >> $GITHUB_ENV
+          echo "export SONAR_TOKEN=${{ secrets.SONAR_TOKEN }}" >> $GITHUB_ENV
+
       - name: SonarQube Scan
         uses: sonarsource/sonarqube-scan-action@master
+        with:
+          projectBaseDir: .
