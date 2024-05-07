@@ -4,34 +4,14 @@ on:
   push:
     branches:
       - main
-      - master
-      - develop
-      - 'releases/**'
-  pull_request:
-    types: [opened, synchronize, reopened]
 
 jobs:
-  sonarqube:
+  sonarqube_scan:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Check out code
-      uses: actions/checkout@v2
-      
-    - name: Set up environment variables
-      run: |
-        echo "Setting up environment variables..."
-        export SONAR_HOST_URL='http://localhost:9000'
-        export SONAR_TOKEN='sqp_d8ee3f7ebaac811a63c852786c3b177cae66edc0'
-        export SONAR_PROJECT_KEY='test_repoaq1sw2de' # Add your SonarQube project key here
-        echo "SONAR_HOST_URL: $SONAR_HOST_URL"
-        echo "SONAR_TOKEN: $SONAR_TOKEN"
-        echo "SONAR_PROJECT_KEY: $SONAR_PROJECT_KEY"
-        
-    - name: Run SonarQube Scan
-      uses: sonarsource/sonarqube-scan-action@master
-      env:
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-        SONAR_PROJECT_KEY: ${{ secrets.SONAR_PROJECT_KEY }} 
-        # Use GitHub Secrets for the project key
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: SonarQube Scan
+        run: docker run --network host sonarsource/sonarqube-scan-action@master
