@@ -18,5 +18,5 @@ jobs:
           docker run --network host \
             -e SONAR_TOKEN=sqp_d8ee3f7ebaac811a63c852786c3b177cae66edc0 \
             sonarsource/sonar-scanner-cli \
-            -Dsonar.projectKey=test_repoaq1sw2de
+            -Dsonar.projectKey=test_repoaq1sw2de \
             -Dsonar.host.url=http://172.17.0.1:9000
