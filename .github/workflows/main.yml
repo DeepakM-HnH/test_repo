@@ -15,4 +15,3 @@ jobs:
 
       - name: SonarQube Scan
         run: docker run --network host sonarsource/sonarqube-scan-action:latest
-
