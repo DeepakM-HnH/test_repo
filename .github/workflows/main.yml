@@ -21,8 +21,8 @@ jobs:
     - name: Set up environment variables
       run: |
         echo "Setting up environment variables..."
-        export SONAR_HOST_URL='http://192.168.1.8:9000'
-        export SONAR_TOKEN='sqp_b1b9028638217f797048a9570753e3a125591c51'
+        export SONAR_HOST_URL='http://localhost:9000'
+        export SONAR_TOKEN='sqp_d8ee3f7ebaac811a63c852786c3b177cae66edc0'
         export SONAR_PROJECT_KEY='test_repoaq1sw2de' # Add your SonarQube project key here
         echo "SONAR_HOST_URL: $SONAR_HOST_URL"
         echo "SONAR_TOKEN: $SONAR_TOKEN"
