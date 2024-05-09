@@ -16,8 +16,8 @@ jobs:
       - name: SonarQube Scan
         run: |
           docker run --network host \
-          -e SONAR_TOKEN=sqp_00610d8d56af34cb0864023ecbbbebb8e637d5dc \
+          -e SONAR_TOKEN=sqb_95895eaa1f55d55b1b37a31ea09c59494a7d8c30 \
           sonarsource/sonar-scanner-cli:latest \
           -Dsonar.projectKey=test_repoaq1sw2de \
-          -Dsonar.host.url=http://192.168.0.2:9000
+          -Dsonar.host.url=http://192.168.16.26:9099
 
