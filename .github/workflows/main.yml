@@ -1,23 +1,30 @@
-name: SonarQube Scan
+name: SonarQube Analysis
 
 on:
   push:
     branches:
       - main
-
+  pull_request:
+    branches:
+      - main
 jobs:
-  sonarqube_scan:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: SonarQube Scan
-        run: |
-          docker run --network host \
-          -e SONAR_TOKEN=sqb_95895eaa1f55d55b1b37a31ea09c59494a7d8c30 \
-          sonarsource/sonar-scanner-cli:latest \
-          -Dsonar.projectKey=test_repoaq1sw2de \
-          -Dsonar.host.url=http://192.168.16.26:9099
+      - name: Install .NET CLI Global Tool
+        run: dotnet tool install --global dotnet-sonarscanner --version 6.2.0
 
+      - name: Begin Sonar Scanner
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/premaster'
+        run: dotnet-sonarscanner begin /k:test_repoaq1sw2de /d:sonar.host.url=http://192.168.16.26:9099 /d:sonar.login=sqp_e2994767e335a58cda9f7fd3d75bdde8840439d7
+
+      - name: Build Project
+        run: dotnet build
+
+      - name: End Sonar Scanner
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/premaster'
+        run: dotnet-sonarscanner end /d:sonar.login=sqp_e2994767e335a58cda9f7fd3d75bdde8840439d7
