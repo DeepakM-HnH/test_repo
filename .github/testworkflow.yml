@@ -1,0 +1,31 @@
+name: Test Remote Server Connectivity
+
+on:
+  workflow_dispatch:  # Allows manual trigger from GitHub Actions UI
+
+jobs:
+  test-remote-connection:
+    runs-on: windows-latest  # GitHub-hosted Windows runner
+
+    steps:
+      - name: Test Remote Connection
+        run: |
+          $remoteServer = "192.168.28.52"
+          $username = "hhadmin"
+          $password = ConvertTo-SecureString "P@ssw0rd" -AsPlainText -Force
+          $cred = New-Object System.Management.Automation.PSCredential ($username, $password)
+          
+          # Run a simple test command on the remote server
+          Invoke-Command -ComputerName $remoteServer -Credential $cred -ScriptBlock {
+            Write-Host "Connected to $env:COMPUTERNAME"
+            
+            # Create a test folder
+            $testFolder = "C:\Deepak\test-folder"
+            if (!(Test-Path $testFolder)) {
+              New-Item -ItemType Directory -Path $testFolder
+              Write-Host "Test folder created successfully: $testFolder"
+            } else {
+              Write-Host "Test folder already exists."
+            }
+          }
+        shell: pwsh
