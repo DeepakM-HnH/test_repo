@@ -30,7 +30,7 @@ jobs:
 
       - name: Publish Application
         run: dotnet publish TestBuildApp/TestBuildApp.sln -c Release -r win-x64 --self-contained -o ${{ github.workspace }}/publish --verbosity detailed
-       
+
       - name: Display Published Artifacts
         run: ls -R ${{ github.workspace }}/publish
 
@@ -41,13 +41,10 @@ jobs:
           path: ${{ github.workspace }}/publish
 
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: build
 
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
-
       - name: Display Start Message
         run: echo "Starting the deployment process..."
 
@@ -55,16 +52,8 @@ jobs:
         uses: actions/download-artifact@v4
         with:
            name: publish-artifact
-           path: ${{ github.workspace }}/publish
-
-      - name: Display Downloaded Artifact Contents
-        run: ls -R ${{ github.workspace }}/publish
-
-      - name: Create Deployment Directory
-        run: mkdir -p "/home/runner/deployment"
-
-      - name: Copy to Deployment Location
-        run: cp -r ${{ github.workspace }}/publish/* "/home/runner/deployment/"
+           path: C:\Deepak\deployment 
 
       - name: Display Deployment Directory Contents
-        run: ls -R "/home/runner/deployment"
+        run: Get-ChildItem -Recurse C:\Deepak\deployment
+        shell: pwsh
