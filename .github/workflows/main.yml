@@ -1,59 +1,31 @@
-name: CI/CD Pipeline -Self Host
+name: Test Remote Server Connectivity
 
 on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+  workflow_dispatch:  # Allows manual trigger from GitHub Actions UI
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  test-remote-connection:
+    runs-on: windows-latest  # GitHub-hosted Windows runner
 
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
-
-      - name: Display Start Message
-        run: echo "Starting the build process..."
-
-      - name: Restore Dependencies
-        run: dotnet restore TestBuildApp/TestBuildApp.sln --verbosity detailed
-
-      - name: Build Project
-        run: dotnet build TestBuildApp/TestBuildApp.sln --verbosity detailed
-
-      - name: Create Publish Directory
-        run: mkdir -p ${{ github.workspace }}/publish
-
-      - name: Publish Application
-        run: dotnet publish TestBuildApp/TestBuildApp.sln -c Release -r win-x64 --self-contained -o ${{ github.workspace }}/publish --verbosity detailed
-
-      - name: Display Published Artifacts
-        run: ls -R ${{ github.workspace }}/publish
-
-      - name: Archive Publish Directory
-        uses: actions/upload-artifact@v4
-        with: 
-          name: publish-artifact
-          path: ${{ github.workspace }}/publish
-
-  deploy:
-    runs-on: self-hosted
-    needs: build
-
-    steps:
-      - name: Display Start Message
-        run: echo "Starting the deployment process..."
-
-      - name: Download Published Artifacts
-        uses: actions/download-artifact@v4
-        with:
-           name: publish-artifact
-           path: C:\Deepak\deployment 
-
-      - name: Display Deployment Directory Contents
-        run: Get-ChildItem -Recurse C:\Deepak\deployment
+      - name: Test Remote Connection
+        run: |
+          $remoteServer = "192.168.28.52"
+          $username = "hhadmin"
+          $password = ConvertTo-SecureString "P@ssw0rd" -AsPlainText -Force
+          $cred = New-Object System.Management.Automation.PSCredential ($username, $password)
+          
+          # Run a simple test command on the remote server
+          Invoke-Command -ComputerName $remoteServer -Credential $cred -ScriptBlock {
+            Write-Host "Connected to $env:COMPUTERNAME"
+            
+            # Create a test folder
+            $testFolder = "C:\Deepak\test-folder"
+            if (!(Test-Path $testFolder)) {
+              New-Item -ItemType Directory -Path $testFolder
+              Write-Host "Test folder created successfully: $testFolder"
+            } else {
+              Write-Host "Test folder already exists."
+            }
+          }
         shell: pwsh
