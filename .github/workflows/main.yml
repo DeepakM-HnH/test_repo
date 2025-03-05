@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, Windows]
 
     steps:
       - name: Checkout Repository
@@ -19,9 +19,6 @@ jobs:
       - name: Display Start Message
         run: echo "Starting the build process..."
 
-      - name: Change to Project Directory
-        run: cd "${{ github.workspace }}"
-
       - name: Restore Dependencies
         run: dotnet restore TestBuildApp/TestBuildApp.sln
 
@@ -29,22 +26,13 @@ jobs:
         run: dotnet build TestBuildApp/TestBuildApp.sln
 
       - name: Create Publish Directory
-        run: mkdir -p ${GITHUB_WORKSPACE}/publish
-
-      - name: Display Publish Directory Contents
-        run: ls -R ${GITHUB_WORKSPACE}/publish
-
-      - name: Change to Project Directory
-        run: cd "${{ github.workspace }}/TestBuildApp"
-
-      - name: Display Directory Contents
-        run: ls -R "${{ github.workspace }}/TestBuildApp"
+        run: mkdir -p ${{ github.workspace }}/publish
 
       - name: Publish Application
-        run: dotnet publish -c Release -r win-x64 --self-contained -o ${GITHUB_WORKSPACE}/publish TestBuildApp/TestBuildApp.sln
+        run: dotnet publish -c Release -r win-x64 --self-contained -o ${{ github.workspace }}/publish TestBuildApp/TestBuildApp.sln
        
       - name: Display Published Artifacts
-        run: ls -R ${GITHUB_WORKSPACE}/publish
+        run: ls -R ${{ github.workspace }}/publish
 
       - name: Archive Publish Directory
         uses: actions/upload-artifact@v4
@@ -53,35 +41,31 @@ jobs:
           path: ${{ github.workspace }}/publish
 
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted  # Ensure this is correct for your self-hosted Windows runner
 
     needs: build
 
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
-
       - name: Display Start Message
         run: echo "Starting the deployment process..."
 
       - name: Download Published Artifacts
         uses: actions/download-artifact@v4
         with:
-           name: publish-artifact
-           path: ${{ github.workspace }}/publish
+          name: publish-artifact
+          path: ${{ github.workspace }}\publish
 
       - name: Display Downloaded Artifact Contents
-        run: ls -R ${GITHUB_WORKSPACE}/publish
-        working-directory: ${{ github.workspace }}
+        run: dir /s ${{ github.workspace }}\publish
 
       - name: Create Deployment Directory
-        run: mkdir -p "C:/Deepak/deployment/"
+        run: mkdir "C:\Deepak\deployment"
 
       - name: Display Deployment Directory Contents Before Copy
-        run: ls -R "C:/Deepak/deployment/"
+        run: dir /s "C:\Deepak\deployment"
 
       - name: Copy to Deployment Location
-        run: cp -r "${GITHUB_WORKSPACE}/publish/"* "C:/Deepak/deployment/"
+        run: xcopy /E /I /Y "${{ github.workspace }}\publish\*" "C:\Deepak\deployment\"
 
       - name: Display Deployment Directory Contents After Copy
-        run: ls -R "C:/Deepak/deployment/"
+        run: dir /s "C:\Deepak\deployment"
