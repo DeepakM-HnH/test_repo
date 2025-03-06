@@ -1,26 +1,31 @@
-name: Test WinRM Remote Connection
+name: Test PowerShell Connection
 
 on:
   push:
     branches:
-      - main  # Run the workflow when pushing to the main branch
-  workflow_dispatch:  # Allows manual execution from GitHub UI
+      - main
 
 jobs:
-  remote-winrm:
-    runs-on: windows-latest  # Use Windows runner
-
+  test-connection:
+    runs-on: windows-latest
     steps:
-      - name: Install WinRM Module
-        shell: pwsh
-        run: Install-Module -Name PSWSMan -Force -SkipPublisherCheck -Scope CurrentUser
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-      - name: Test Remote WinRM Connection
+      - name: Run PowerShell Command
         shell: pwsh
         run: |
-          $secPassword = ConvertTo-SecureString 'P@ssw0rd' -AsPlainText -Force
-          $cred = New-Object System.Management.Automation.PSCredential ('EDGEAPPBK\hhadmin', $secPassword)
-          
-          Invoke-Command -ComputerName edgeappbk -Credential $cred -ScriptBlock { 
-            hostname
+          Write-Output "Testing remote connection..."
+
+          # Hardcoded credentials (ONLY FOR TESTING)
+          $username = "hhadmin"
+          $password = ConvertTo-SecureString "P@ssw0rd" -AsPlainText -Force
+          $credential = New-Object System.Management.Automation.PSCredential ($username, $password)
+
+          # Attempt PowerShell session connection
+          try {
+            $session = New-PSSession -ComputerName "edgeappbk" -Credential $credential
+            if ($session) { Write-Output "Connected Successfully!" }
+          } catch {
+            Write-Output "Connection Failed! Error: $_"
           }
