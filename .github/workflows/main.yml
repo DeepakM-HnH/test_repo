@@ -17,15 +17,15 @@ jobs:
         run: |
           Write-Output "Testing remote connection..."
 
-          # Hardcoded credentials (ONLY FOR TESTING)
           $username = "hhadmin"
           $password = ConvertTo-SecureString "P@ssw0rd" -AsPlainText -Force
           $credential = New-Object System.Management.Automation.PSCredential ($username, $password)
 
-          # Allow Basic Authentication if necessary
-          Set-Item WSMan:\localhost\Service\Auth\Basic -Value $true -Force
+          # Allow Basic Authentication and Unencrypted traffic on client side (GitHub Runner)
+          Set-Item WSMan:\localhost\Client\AllowUnencrypted -Value $true -Force
+          Set-Item WSMan:\localhost\Client\Auth\Basic -Value $true -Force
           
-          # Attempt connection with Basic Authentication
+          # Attempt connection using Basic Authentication
           try {
             $session = New-PSSession -ComputerName "edgeappbk" -Credential $credential -Authentication Basic
             if ($session) { Write-Output "Connected Successfully!" }
