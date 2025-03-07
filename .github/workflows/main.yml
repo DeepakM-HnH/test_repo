@@ -22,9 +22,12 @@ jobs:
           $password = ConvertTo-SecureString "P@ssw0rd" -AsPlainText -Force
           $credential = New-Object System.Management.Automation.PSCredential ($username, $password)
 
-          # Attempt PowerShell session connection
+          # Allow Basic Authentication if necessary
+          Set-Item WSMan:\localhost\Service\Auth\Basic -Value $true -Force
+          
+          # Attempt connection with Basic Authentication
           try {
-            $session = New-PSSession -ComputerName "edgeappbk" -Credential $credential
+            $session = New-PSSession -ComputerName "edgeappbk" -Credential $credential -Authentication Basic
             if ($session) { Write-Output "Connected Successfully!" }
           } catch {
             Write-Output "Connection Failed! Error: $_"
